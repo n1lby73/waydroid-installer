@@ -38,6 +38,22 @@ displayserver(){
 fi
 }
 
+#update fedora function
+update(){
+    read -p $"\e[1;32mDo you want to update to fedora 35 (y/n - default:- y):\e[0m" update
+    if [[ $update == "n" || $update == "N" ]]; then
+        echo "Error:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
+        exit
+    elif [[ $update == "Y" || $update == "y" ]]; then
+        sudo dnf system-upgrade --releasever=35
+    elif [[ $update == " " ]]; then
+        echo "using default value"
+        sudo dnf system-upgrade --releasever=35
+    else
+        update
+    fi
+}
+
 #check if distro is fedora
 fedora=$(source /etc/os-release && echo $ID)
 version=$(source /etc/os-release && echo $VERSION_ID)
@@ -46,7 +62,9 @@ if [[ "$fedora" != "fedora" ]]; then
 else
     if [[ "$version" -lt 35 ]]; then
         echo "Your fedora version is not supported"
-        exit
+        update
+    else
+        continue &> /dev/null
     fi
 fi
 displayserver
