@@ -37,7 +37,7 @@ GNOME
   ./requirements.sh ##or 
   bash requirements.sh
 ```  
-#Contributors
+# Contributors
 @Fuseteam
 
 ## To do:
