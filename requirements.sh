@@ -46,7 +46,7 @@ update(){
         exit
     elif [[ $update == "Y" || $update == "y" ]]; then
         sudo dnf system-upgrade --releasever=35
-    elif [[ $update == " " ]]; then
+    elif [[ $update == "" ]]; then
         echo "using default value"
         sudo dnf system-upgrade --releasever=35
     else
