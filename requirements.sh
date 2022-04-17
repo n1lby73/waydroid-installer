@@ -22,18 +22,33 @@ de(){
         sudo apt-get install weston -y > /dev/null
 	fi
 }
-#check if window system is wayland
 
-wayland=$(echo $XDG_SESSION_TYPE)
-if [[ "$wayland" != "wayland" ]]; then
-    echo " "
-	echo -e "\e[1;31mError\e[0m: unsupported display server: "$wayland
-    echo  " "
-    echo -e "\e[1;36mEnabling wayland session\e[0m"
+#function to check if window system is wayland
 
-    #check if desktop enviroment is gnome
-    de
+displayserver(){
+    wayland=$(echo $XDG_SESSION_TYPE)
+    if [[ "$wayland" != "wayland" ]]; then
+        echo " "
+	    echo -e "\e[1;31mError\e[0m: unsupported display server: "$wayland
+        echo  " "
+        echo -e "\e[1;36mEnabling wayland session\e[0m"
+
+        #check if desktop enviroment is gnome
+        de
 fi
+}
 
+#check if distro is fedora
+fedora=$(source /etc/os-release && echo $ID)
+version=$(source /etc/os-release && echo $VERSION_ID)
+if [[ "$fedora" != "fedora" ]]; then
+    continue &> /dev/null
+else
+    if [[ "$version" -lt 35 ]]; then
+        echo "Your fedora version is not supported"
+        exit
+    fi
+fi
+displayserver
 #starting installation script
 bash install_script.sh
