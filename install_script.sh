@@ -184,7 +184,7 @@ menu(){
     elif [[ $os == 3 || $os == 03 ]];then 
         echo -e "\e[1;36mAdding copr repository\e[0m"
         sudo yum update
-        sudo dnf copr enable aleasto/waydroid
+        sudo dnf copr enable aleasto/waydroid -y
 
         #check fedora version
         version=$(source /etc/os-release && echo $VERSION_ID)
