@@ -30,6 +30,8 @@ GNOME
 
 
 ### Usage:
+![waydroid2](https://user-images.githubusercontent.com/65239245/163733897-b2ca876a-381b-41b5-a692-d757184fbd43.png)
+
 ```
   git clone https://github.com/n1lby73/wd-installer
   cd wd-installer
