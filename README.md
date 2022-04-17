@@ -1,7 +1,7 @@
 ![waydroid](https://user-images.githubusercontent.com/65239245/163730035-ca89be56-e56f-4827-a736-0d87d879301e.png)
 
 
-# waydroid-installer (wd-installer)
+# Waydroid-installer (wd-installer)
 
 Automate installation process of waydroid on almost any linux distro
 
