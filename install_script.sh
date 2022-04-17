@@ -183,13 +183,13 @@ menu(){
 
     elif [[ $os == 3 || $os == 03 ]];then 
         echo -e "\e[1;36mAdding copr repository\e[0m"
-        dnf copr enable aleasto/waydroid && dnf update
+        sudo dnf copr enable aleasto/waydroid && dnf update
 
         echo -e "\e[1;36mInstalling waydroid\e[0m"
-        dnf install waydroid
+        sudo dnf install waydroid
 
         echo -e "\e[1;36msetting up waydroid\e[0m"
-        waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && systemctl enable --now waydroid-container
+        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && systemctl enable --now waydroid-container
 
         #check vm
         check_vm
