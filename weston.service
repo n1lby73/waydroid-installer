@@ -1,0 +1,8 @@
+[Unit]
+Description=Weston Compositor
+
+[Service]
+ExecStart=/usr/bin/weston
+
+[Install]
+WantedBy=graphical-session.target
