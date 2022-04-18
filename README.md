@@ -76,6 +76,7 @@ Installer support for:
 - [x] Debian distros
 - [ ] Arch distros
 - [x] Fedora
+- [ ] Desktop launcher for weston session
 - [ ] Solus
 - [ ] Android 11
 - [ ] Offline support for installing waydroid if you have the images
