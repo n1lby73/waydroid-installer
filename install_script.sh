@@ -202,7 +202,12 @@ menu(){
 
         #check vm
         check_vm
-
+        
+        #check and start weston
+        weston 
+        echo ""
+        echo -e "\e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
+        
     else
         menu
     fi
