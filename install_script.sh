@@ -11,7 +11,7 @@ weston(){
         sudo mkdir ~/.config/systemd/user &> /dev/null
         sudo cp weston.service ~/.config/systemd/user
     fi
-        sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications/waydroid launcher.destop
+        sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications/"waydroid launcher.destop"
 
         echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
         echo -e "\e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start weston && waydroid show-full-ui\e[0m' from terminal"
