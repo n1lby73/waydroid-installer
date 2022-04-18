@@ -11,7 +11,7 @@ It automates the process of installing waydroid - A container base approach to b
 # NOTE:
 - This installer supports waydroid android version 10
 
-- Always pay attention to major warning signs indicated by the script else waydroid may fail to boot
+- Always pay attention to major warning signs indicated by the script else waydroid may fail to boot or not operate properly
 
 - Gapps build for fedora tends to crash browser but firefox only has proven to bypass that
 
