@@ -178,7 +178,7 @@ menu(){
         sudo apt-get update && sudo apt-get upgrade && sudo apt-get install curl python3 lxc ca-certificates -y
         if [[ $? -ne 0 ]]; then
         echo " "
-        echo -e "\e[1;31mMajor warning:-\e[0m dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update\e[0m' manually"
+        echo -e "\e[1;31mMajor warning:-\e[0m dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
         exit 1
         fi
 
