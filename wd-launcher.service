@@ -1,0 +1,8 @@
+[Unit]
+Description=Waydroid service
+Wants=weston.service
+After=weston.service
+BindsTo=weston.service
+
+[Service]
+ExecStart=/usr/bin/waydroid show-full-ui
