@@ -5,14 +5,14 @@ weston(){
     wayland=$(echo $XDG_SESSION_TYPE)
     DE=$(echo $XDG_CURRENT_DESKTOP)
     if [[ "$wayland" != "wayland" && "$DE" != *"GNOME" ]]; then
-    sudo cp weston.service ~/.config/systemd/user
+        sudo cp weston.service ~/.config/systemd/user && sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications
     if [[ $? -ne 0 ]];then
         sudo mkdir ~/.config/systemd &> /dev/null
         sudo mkdir ~/.config/systemd/user &> /dev/null
         sudo cp weston.service ~/.config/systemd/user
     fi
     echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
-    echo -e "\e[1;31mMajor warning\e[0m: always run '\e[1;41msystemctl --user start weston\e[0m' before starting waydroid"
+    echo -e "\e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start weston && waydroid show-full-ui\e[0m' from terminal"
     systemctl --user start weston
     sudo systemctl restart waydroid-container.service
     waydroid show-full-ui
