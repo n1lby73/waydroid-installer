@@ -12,7 +12,7 @@ weston(){
         sudo cp weston.service ~/.config/systemd/user
     fi
     echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
-    echo -e "\e[1;31mWarning\e[0m: always run '\e[1;41msystemctl --user start weston\e[0m' before starting waydroid"
+    echo -e "\e[1;31mMajor warning\e[0m: always run '\e[1;41msystemctl --user start weston\e[0m' before starting waydroid"
     systemctl --user start weston
     sudo systemctl restart waydroid-container.service
     waydroid show-full-ui
@@ -172,7 +172,7 @@ menu(){
         
         wayland_warning=$(echo $XDG_SESSION_TYPE)
         if [[ "$wayland_warning" != "wayland" ]]; then
-            echo -e "\e[1;31mWarning:-\e[0mSwitch to wayland display server before launching waydroid"
+            echo -e "\e[1;31mMajor warning:-\e[0mSwitch to wayland display server before launching waydroid"
         else
             waydroid show-full-ui
         fi
@@ -221,7 +221,7 @@ menu(){
 
         #choose which image to install
         gapps_fedora
-        
+
         #check vm
         check_vm
         
