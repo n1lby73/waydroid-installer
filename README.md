@@ -62,6 +62,6 @@ Installer support for:
 
 
 ### support
-- For Queries: [Telegram group](t.me/waydroid)
+- For Queries: [Telegram group](https://t.me/waydroid)
 - Contributions, issues, and feature requests are welcome!
 - Give a ★ if you like this project!
