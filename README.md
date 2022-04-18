@@ -16,11 +16,23 @@ It automates the process of installing waydroid - A container base approach to b
 - Gapps build for fedora tends to crash browser but firefox only has proven to bypass that
 
 - During first launch including after a reboot, it may take up to 2-3 minutes before anything would be visible on your screen 
+
 ### Features:
 - Installs waydroid on distro with no support for wayland
 - Ability to install waydroid on any linux pc
 - Choose if you need GAPPS or not
+- Makes waydroid launch easier on weston enabled pc with the help of a desktop icon
 
+### Compatibility
+To check if waydroid is compatible with your device, kindly run:
+```
+
+```
+If the above command outputs
+```
+
+```
+Then neither waydroid nor this installer is compatible with your device
 
 ## Desktop environment:
  During development wd-installer was tested on the following desktop enviroment:
