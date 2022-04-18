@@ -94,6 +94,53 @@ gapps_fedora(){
      
 }
 
+#Function for debian gapps prompt
+gapps_debian(){
+    read -p $'\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+
+        if [[ $gapps == "n" || $gapps == "N" ]]; then
+            sudo apt-get install waydroid -y
+            sudo waydroid init
+            sudo systemctl start waydroid-container
+
+        elif [[ $gapps == "y" || $gapps == "Y" ]]; then
+            sudo apt-get install waydroid -y
+            sudo waydroid init -s GAPPS
+            sudo systemctl start waydroid-container
+
+        elif [[ $gapps == "" ]]; then 
+            echo -e "\e[1;32mUsing default value\e[0m"
+            sudo apt-get install waydroid -y
+            sudo waydroid init
+            sudo systemctl start waydroid-container
+        
+        else
+            gapps_debian
+
+        fi
+}
+
+#Function for arch gapps prompt
+gapps_arch(){
+    read -p $"\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m" gapps
+
+        if [[ $gapps == "n" || $gapps == "N" ]]; then
+            sudo yay -S waydroid && waydroid init
+
+        elif [[ $gapps == "y" || $gapps == "Y" ]]; then
+            sudo yay -S waydroid && waydroid init -s GAPPS
+
+        elif [[ $gapps == "" ]]; then
+            echo -e"\e[1;32mInstalling default\e[0m"
+            sudo yay -S waydroid && waydroid init
+        
+        else
+            gapps_arch
+
+        fi
+}
+
+#menu function
 menu(){
     banner
     YELLOW="\e[1;33m"
@@ -142,25 +189,9 @@ menu(){
         #install waydroid
         echo -e "\e[1;36mInstalling waydroid....\e[0m"
         sleep 0.5
-        read -p $'\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
 
-        if [[ $gapps == "n" || $gapps == "N" ]]; then
-            sudo apt-get install waydroid -y
-            sudo waydroid init
-            sudo systemctl start waydroid-container
-
-        elif [[ $gapps == "y" || $gapps == "Y" ]]; then
-            sudo apt-get install waydroid -y
-            sudo waydroid init -s GAPPS
-            sudo systemctl start waydroid-container
-
-        else
-            echo -e "\e[1;32mUsing default value\e[0m"
-            sudo apt-get install waydroid -y
-            sudo waydroid init
-            sudo systemctl start waydroid-container
-
-        fi
+        #check which image to install
+        gapps_debian
 
         #check vm
         check_vm
@@ -185,18 +216,9 @@ menu(){
         echo " "
         echo -e "\e[1;36mInstalling waydroid\e[0m"
         sleep 0.5
-        read -p $"\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m" gapps
-
-        if [[ $gapps == "n" || $gapps == "N" ]]; then
-            sudo yay -S waydroid && waydroid init
-
-        elif [[ $gapps == "y" || $gapps == "Y" ]]; then
-            sudo yay -S waydroid && waydroid init -s GAPPS
-
-        else
-            echo -e"\e[1;32mInstalling default\e[0m"
-            sudo yay -S waydroid && waydroid init
-        fi
+        
+        #check which image to install
+        gapps_arch
 
         #check vm
         check_vm
@@ -219,6 +241,10 @@ menu(){
         echo -e "\e[1;36mInstalling waydroid\e[0m"
         sudo dnf install waydroid -y
 
+        
+        echo -e "\e[1;36mSetting up waydroid\e[0m"
+        sleep 0.5
+        
         #choose which image to install
         gapps_fedora
 
