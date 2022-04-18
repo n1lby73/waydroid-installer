@@ -42,17 +42,17 @@ fi
 update(){
     read -p $"\e[1;32mDo you want to update to fedora 35 (y/n - default:- y):\e[0m" update
     if [[ $update == "n" || $update == "N" ]]; then
-        echo "Error:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
+        echo -e "\e[1;31mError\e[om:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
         exit
     elif [[ $update == "Y" || $update == "y" ]]; then
-        echo "Warning:- it is recomended that your battery is above 50% before you continue"
-        echo "Press enter to continue or ctrl+c to exit...."
+        echo -e "\e[1;31mWarning\e[0m:- it is recomended that your battery is above 50% before you continue"
+        echo -e "\e[1;32mPress enter to continue or ctrl+c to exit....\e[0m"
         read ts2
         sudo dnf --refresh upgrade -y && sudo dnf system-upgrade download --releasever=35 -y
         sudo dnf system-upgrade reboot
 
     elif [[ $update == "" ]]; then
-        echo "using default value"
+        echo -e "\e[1;36musing default value\e[0m"
         sudo dnf --refresh upgrade -y && sudo dnf system-upgrade download --releasever=35 -y
         sudo dnf system-upgrade reboot
 
@@ -68,10 +68,10 @@ if [[ "$fedora" != "fedora" ]]; then
     continue &> /dev/null
 else
     if [[ "$version" -lt 35 ]]; then
-        echo "Your fedora version is not supported"
+        echo -e "\e[1;31mWarning:- your fedora version is not supported\e[0m"
         update
     else
-        echo "Cleaning up old packages"
+        echo -e "\e[1;36mCleaning up old packages...\e[0m"
         sleep 5
         sudo dnf system-upgrade clean
         sudo dnf clean packages
