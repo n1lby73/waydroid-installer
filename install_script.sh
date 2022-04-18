@@ -11,7 +11,7 @@ weston(){
         sudo mkdir ~/.config/systemd/user &> /dev/null
         sudo cp weston.service ~/.config/systemd/user
     fi
-        sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications
+        sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications/waydroid launcher.destop
 
         echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
         echo -e "\e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start weston && waydroid show-full-ui\e[0m' from terminal"
@@ -180,7 +180,7 @@ menu(){
         sudo apt-get update && sudo apt-get upgrade && sudo apt-get install curl python3 lxc ca-certificates -y
         if [[ $? -ne 0 ]]; then
         echo " "
-        echo -e "\e[1;31mMajor warning:-\e[0m dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
+        echo -e "\e[1;31mMajor warning:-\e[0m Dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
         exit 1
         fi
 
@@ -200,7 +200,6 @@ menu(){
         #check which image to install
         gapps_debian
         
-
         #check vm
         check_vm
 
@@ -221,6 +220,7 @@ menu(){
         #going to make use of yay
         #pacman -Syy wget && wget https://aur.archlinux.org/cgit/aur.git/snapshot/waydroid.tar.gz && tar -xf waydroid.tar.gz -C 
         sudo pacman -Syu --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+        cd ~ && rm -rf yay-bin.git
         echo " "
         echo -e "\e[1;36mInstalling waydroid\e[0m"
         sleep 0.5
