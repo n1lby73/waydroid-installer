@@ -12,7 +12,10 @@ It automates the process of installing waydroid - A container base approach to b
 - This installer supports waydroid android version 10
 
 - There are some warning signs that would be available to you while running the script, failure to adhere to these warning would make waydroid not to boot after installation process is complete
+
 - Gapps build is not available dor fedora
+
+- During first launch including after a reboot, it may take up to 2-3 minutes before anything would be visible on your screen 
 ### Features:
 - Installs waydroid on distro with no support for wayland
 - Ability to install waydroid on any linux pc
