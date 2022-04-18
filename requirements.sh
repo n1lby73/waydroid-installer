@@ -45,6 +45,9 @@ update(){
         echo "Error:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
         exit
     elif [[ $update == "Y" || $update == "y" ]]; then
+        echo "Warning:- it is recomended that your battery is above 50% before you continue"
+        echo "Press enter to continue or ctrl+c to exit...."
+        read ts2
         sudo dnf --refresh upgrade -y && sudo dnf system-upgrade download --releasever=35 -y
         sudo dnf system-upgrade reboot
 
@@ -68,7 +71,8 @@ else
         echo "Your fedora version is not supported"
         update
     else
-        echo "cleaning up downloaded packages"
+        echo "Cleaning up old packages"
+        sleep 5
         sudo dnf system-upgrade clean
         sudo dnf clean packages
         continue &> /dev/null
