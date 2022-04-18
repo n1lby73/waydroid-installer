@@ -71,6 +71,29 @@ check_vm(){
     fi
 }
 
+#Function for fedora gapps prompt
+gapps_fedora(){
+     read -p $'\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+    
+    if [[ $gapps == "n" || $gapps == "N" ]]; then
+        echo -e "\e[1;36msetting up waydroid\e[0m"
+        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
+    
+    elif [[ $gapps == "y" || $gapps == "Y" ]]; then
+        echo -e "\e[1;36msetting up waydroid\e[0m"
+        sudo waydroid init -c https://waydroid.bardia.tech/OTA/system -v https://waydroid.bardia.tech/OTA/vendor && sudo systemctl enable --now waydroid-container
+    
+    elif [[ $gapps == "" ]]; then
+        echo -e "\e[1;36msetting up waydroid with default value\e[0m"
+        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
+    
+    else
+        gapps_fedora
+    
+    fi
+     
+}
+
 menu(){
     banner
     YELLOW="\e[1;33m"
@@ -196,9 +219,9 @@ menu(){
         echo -e "\e[1;36mInstalling waydroid\e[0m"
         sudo dnf install waydroid -y
 
-        echo -e "\e[1;36msetting up waydroid\e[0m"
-        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
-
+        #choose which image to install
+        gapps_fedora
+        
         #check vm
         check_vm
         
