@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=Waydroid launcher
-Exec=systemctl --user start weston && waydroid show-full-ui
+Exec=systemctl --user start wd-launcher
 Icon=/usr/share/wd-launcher/waydroid.png
