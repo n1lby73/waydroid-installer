@@ -45,10 +45,14 @@ update(){
         echo "Error:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
         exit
     elif [[ $update == "Y" || $update == "y" ]]; then
-        sudo dnf system-upgrade --releasever=35
+        sudo dnf --refresh upgrade -y && sudo dnf system-upgrade download --releasever=35 -y
+        sudo dnf system-upgrade reboot
+
     elif [[ $update == "" ]]; then
         echo "using default value"
-        sudo dnf system-upgrade --releasever=35
+        sudo dnf --refresh upgrade -y && sudo dnf system-upgrade download --releasever=35 -y
+        sudo dnf system-upgrade reboot
+
     else
         update
     fi
@@ -64,6 +68,9 @@ else
         echo "Your fedora version is not supported"
         update
     else
+        echo "cleaning up downloaded packages"
+        sudo dnf system-upgrade clean
+        sudo dnf clean packages
         continue &> /dev/null
     fi
 fi
