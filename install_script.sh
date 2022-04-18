@@ -13,7 +13,6 @@ weston(){
     fi
     echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
     echo -e "\e[1;31mWarning\e[0m: always run '\e[1;41msystemctl --user start weston\e[0m' before starting waydroid"
-    echo  "during first launch(and during first launches after reboot),\nit may take 2-3 minutes before anything appears on screen\n"
     systemctl --user start weston
     sudo systemctl restart waydroid-container.service
     waydroid show-full-ui
@@ -207,6 +206,7 @@ menu(){
         weston 
         echo ""
         echo -e "\e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
+        waydroid show-full-ui
         
     else
         menu
