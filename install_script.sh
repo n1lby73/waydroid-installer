@@ -183,7 +183,7 @@ menu(){
 
     elif [[ $os == 3 || $os == 03 ]];then 
         echo -e "\e[1;36mAdding copr repository\e[0m"
-        sudo yum update
+        sudo yum update -y
         sudo dnf copr enable aleasto/waydroid -y
 
         #check fedora version
@@ -191,11 +191,11 @@ menu(){
         if [[ "$version" -ne 35 ]]; then
             continue &> /dev/null
         else
-            sudo dnf update
+            sudo dnf update -y
         fi
 
         echo -e "\e[1;36mInstalling waydroid\e[0m"
-        sudo dnf install waydroid
+        sudo dnf install waydroid -y
 
         echo -e "\e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
