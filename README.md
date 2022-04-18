@@ -41,8 +41,7 @@ GNOME
   git clone https://github.com/n1lby73/wd-installer
   cd wd-installer
   chmod +x *
-  ./requirements.sh ##or 
-  bash requirements.sh
+  ./requirements.sh
 ```  
 ### Single line of command
 ``` 
