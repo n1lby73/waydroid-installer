@@ -69,6 +69,17 @@ Afterward copy the output and paste [here](https://www.google.com/android/uncert
 ```
 sudo systemctl restart waydroid-container
 ```
+
+# Troubleshooting:
+### Stuck at boot screen on weston compositor
+Run the below command if you are either
+- Stucked at boot screen
+- waited longer than 5-10 minutes and nothing shows on weston compositor
+close weston compositor, open a terminal and pastethis there:
+```
+sudo systemctl restart waydroid-container
+```
+After that you are good to go
 # Contributors
 @Fuseteam
 
