@@ -84,8 +84,8 @@ fedora_update(){
 
 #downgrade kernel function
 kernel_downgrade(){
-    read -p $"\e[32m[\e[35m*\e[32m] \e[1;32mDo you want to downgrade to kernel '5.16.13' (y/n/o[yes/no/offline] - default:- y):\e[0m" downgrade
-    if [[ $update == "n" || $update == "N" ]]; then
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want to downgrade to kernel "5.16.13" (y/n/o[yes/no/offline] - default:- y):\e[0m' downgrade
+    if [[ $downgrade == "n" || $downgrade == "N" ]]; then
         echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning\e[0m: you are about to '\e[1;41minstall waydroid\e[0m' on an '\e[1;41mexperimental kernel\e[0m'"
         echo -e "\e[32m[\e[35m*\e[32m] \e[1;32mPress enter to continue or ctrl+c to exit....\e[0m"
         read ts2
@@ -94,7 +94,7 @@ kernel_downgrade(){
         sleep 5
         continue &> /dev/null
 
-    elif [[ $update == "y" || $update == "Y" ]]; then
+    elif [[ $downgrade == "y" || $downgrade == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mChecking for dependencies\e[0m"
         sudo pacman -Syyu wget
         echo " "
@@ -114,7 +114,7 @@ kernel_downgrade(){
         echo -e "\e[32m[\e[35m*\e[32m] \e[1;32mRebooting in 5 secs to apply changes\nRe-run installer after boot\e[0m"
         sleep 5
         reboot now
-    elif [[ $update == "" ]]; then
+    elif [[ $downgrade == "" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mUsing default value\e[0m"
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mChecking for dependencies\e[0m"
         sudo pacman -Syyu wget
@@ -135,13 +135,14 @@ kernel_downgrade(){
         echo -e "\e[32m[\e[35m*\e[32m] \e[1;32mRebooting in 5 secs to apply changes\nRe-run installer after boot\e[0m"
         sleep 5
         reboot now
-    elif [[ $update == "O" || $update == "o" ]]; then
+    elif [[ $downgrade == "O" || $downgrade == "o" ]]; then
         #function to check for directory and files
         dir_checker(){
-            read -p "\e[32m[\e[35m*\e[32m] \e[1;36mEnter path to kernel directory: \e[0m"$dir
+            read -p $'\e[32m[\e[35m*\e[32m] \e[1;36mEnter path to kernel directory: \e[0m' dir
             if [[ -d $dir ]]; then
                 #check if linux-zen and linux-zen-headers files are in directory
-                echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mchecking for the following files:\e[0m\n1. linux-zen-5.16.13.zen1-1-x86_64.pkg.tar.zst\n2. linux-zen-headers/linux-zen-headers-5.16.13.zen1-1-x86_64.pkg.tar.zst"
+                echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mchecking for the following files:\e[0m\n1. linux-zen-5.16.13.zen1-1-x86_64.pkg.tar.zst\n2. linux-zen-headers/linux-zen-headers-5.16.13.zen1-1-x86_64.pkg.tar.zst" 
+                sleep 2
                 if [[ -f $dir/linux-zen-5.16.13.zen1-1-x86_64.pkg.tar.zst && -f $dir/linux-zen-headers/linux-zen-headers-5.16.13.zen1-1-x86_64.pkg.tar.zst ]]; then
                     echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mDowngrading your Arch kernel now...\e[0m"
                     sudo pacman -U linux-zen-5.16.13.zen1-1-x86_64.pkg.tar.zst linux-zen-headers-5.16.13.zen1-1-x86_64.pkg.tar.zst
@@ -150,13 +151,15 @@ kernel_downgrade(){
                     reboot now
                 else
                     echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mError:- \e[1;32mOne or both files not found, input correct path to directory\e[0m"
+                    echo " "
                     sleep 2
                     dir_checker
                 fi
             else
-                echo -e "\e[32m[\e[35m-\e[32m] \e[1;32mDirectory not found, input correct path to directory\e[0m"
+                echo -e "\e[32m[\e[35m-\e[32m] \e[1;32mDirectory not found, input correct/full path to directory\e[0m"
                 sleep 2
                 dir_checker
+            fi
         }
         dir_checker
             
@@ -192,8 +195,9 @@ if [[ "$arch" != "arch" ]]; then
     continue &> /dev/null
 else
     #check arch kernel installed
-    if [[ "$kernel" > 5.16.3]]; then
-        echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning:- your kernel is not yet supported: \e[0m"$kernel
+    if [[ "$kernel" > 5.16.3 ]]; then
+        echo " "
+        echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning:-\e[0m your kernel is not yet supported: "$kernel
         kernel_downgrade
     else
         continue &> /dev/null
