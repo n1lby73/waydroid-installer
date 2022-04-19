@@ -60,7 +60,7 @@ GNOME
 ``` 
 git clone https://github.com/n1lby73/wd-installer && cd wd-installer && bash requirements.sh 
 ```
-### Goggle playstore for gapps build
+### Google playstore for gapps build
 For google playstore and other service to function properly you need to retrieve your android build code using 
 ```
 echo ANDROID_RUNTIME_ROOT=/apex/com.android.runtime sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | sudo waydroid shell
