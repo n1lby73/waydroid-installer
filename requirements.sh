@@ -40,7 +40,7 @@ fi
 
 #update fedora function
 fedora_update(){
-    read -p $"\e[1;32mDo you want to update to fedora 35 (y/n - default:- y):\e[0m" update
+    read -p $'\e[1;32mDo you want to update to fedora 35 (y/n - default:- y):\e[0m' update
     if [[ $update == "n" || $update == "N" ]]; then
         echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mError\e[om:- Waydroid installer has failed cause of unsupported fedora version\nUpdate to at least fedora 35 and re-run installer"
         exit
