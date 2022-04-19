@@ -11,10 +11,13 @@ weston(){
         sudo mkdir ~/.config/systemd/user &> /dev/null
         sudo cp weston.service ~/.config/systemd/user
     fi
-        sudo mkdir /usr/share/wd-launcher && sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png && sudo cp "waydroid launcher.destop" /usr/share/applications/"waydroid launcher.destop"
+        sudo mkdir /usr/share/wd-launcher
+        sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png
+        sudo cp wd-launcher.service ~/.config/systemd/user
+        sudo cp 'waydroid launcher.destop' /usr/share/applications
 
-        echo  -e "\e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
-        echo -e "\e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start weston && waydroid show-full-ui\e[0m' from terminal"
+        echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
+        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start wd-launcher.service\e[0m' from terminal"
         systemctl --user start weston
         sudo systemctl restart waydroid-container.service
         waydroid show-full-ui
@@ -75,21 +78,23 @@ check_vm(){
 
 #Function for fedora gapps prompt
 gapps_fedora(){
-     read -p $'\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+     read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
     
     if [[ $gapps == "n" || $gapps == "N" ]]; then
-        echo -e "\e[1;36msetting up waydroid\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
     
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
-        echo -e "\e[1;36msetting up waydroid\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://waydroid.bardia.tech/OTA/system -v https://waydroid.bardia.tech/OTA/vendor && sudo systemctl enable --now waydroid-container
     
     elif [[ $gapps == "" ]]; then
-        echo -e "\e[1;36msetting up waydroid with default value\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
         sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
     
     else
+        echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
+        sleep 1
         gapps_fedora
     
     fi
@@ -98,14 +103,16 @@ gapps_fedora(){
 
 #Function for debian gapps prompt
 gapps_debian(){
-    read -p $'\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
+            echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
             sudo apt-get install waydroid -y
             sudo waydroid init
             sudo systemctl start waydroid-container
 
         elif [[ $gapps == "y" || $gapps == "Y" ]]; then
+            echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
             sudo apt-get install waydroid -y
             sudo waydroid init -s GAPPS
             sudo systemctl start waydroid-container
@@ -117,6 +124,8 @@ gapps_debian(){
             sudo systemctl start waydroid-container
         
         else
+            echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
+            sleep 1
             gapps_debian
 
         fi
@@ -124,12 +133,14 @@ gapps_debian(){
 
 #Function for arch gapps prompt
 gapps_arch(){
-    read -p $"\e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m" gapps
+    read -p $"\e[32m[\e[35m+\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m" gapps
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
+            echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
             sudo yay -S waydroid && waydroid init
 
         elif [[ $gapps == "y" || $gapps == "Y" ]]; then
+            echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
             sudo yay -S waydroid && waydroid init -s GAPPS
 
         elif [[ $gapps == "" ]]; then
@@ -137,6 +148,8 @@ gapps_arch(){
             sudo yay -S waydroid && waydroid init
         
         else
+            echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
+            sleep 1
             gapps_arch
 
         fi
@@ -156,7 +169,7 @@ menu(){
     echo "[03] Fedora"
     echo " "
 
-    read -p $"which distro are you running: " os
+    read -p $"\e[32m[\e[35m+\e[32m] which distro are you running: " os
     printf "${STOP}"
 
     if [[ $os == 1 || $os == 1 ]];then
@@ -168,33 +181,33 @@ menu(){
         distro=$(lsb_release -sc)
 
         if [[ "$supported_distros" != *" $distro "* ]]; then
-	        echo -e "\e[1;31mWarning\e[0m-: unsupported distribution: "$distro
-	        echo -e "\e[1;31mWarning\e[0m-: using fallback distribution: "$fallback_distro
+	        echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning\e[0m-: unsupported distribution: "$distro
+	        echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning\e[0m-: using fallback distribution: "$fallback_distro
 	        distro=$fallback_distro
         fi
     
 
         #prerequisite
-        echo -e "\e[1;36mInstalling dependencies....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling dependencies....\e[0m"
 
         sudo apt-get update && sudo apt-get upgrade && sudo apt-get install curl python3 lxc ca-certificates -y
         if [[ $? -ne 0 ]]; then
         echo " "
-        echo -e "\e[1;31mMajor warning:-\e[0m Dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
+        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0m Dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
         exit 1
         fi
 
         echo " "
 
         #add keyring and waydroid repo
-        echo -e "\e[1;36mInstalling repo.....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling repo.....\e[0m"
 
         sudo wget https://repo.waydro.id/waydroid.gpg -O /usr/share/keyrings/waydroid.gpg
         sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/waydroid.gpg] https://repo.waydro.id/ $distro main' > /etc/apt/sources.list.d/waydroid.list"
         sudo apt-get -q update
 
         #install waydroid
-        echo -e "\e[1;36mInstalling waydroid....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid....\e[0m"
         sleep 0.5
 
         #check which image to install
@@ -206,23 +219,23 @@ menu(){
         #check and start weston
         weston 
         echo ""
-        echo -e "\e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
         
         wayland_warning=$(echo $XDG_SESSION_TYPE)
         if [[ "$wayland_warning" != "wayland" ]]; then
-            echo -e "\e[1;31mMajor warning:-\e[0mSwitch to wayland display server before launching waydroid"
+            echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0mSwitch to wayland display server before launching waydroid"
         else
             waydroid show-full-ui
         fi
 
     elif [[ $os == 2 || $os == 02 ]]; then
-        echo -e "\e[1;36mInstalling dependencies....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling dependencies....\e[0m"
         #going to make use of yay
         #pacman -Syy wget && wget https://aur.archlinux.org/cgit/aur.git/snapshot/waydroid.tar.gz && tar -xf waydroid.tar.gz -C 
         sudo pacman -Syu --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
         cd ~ && rm -rf yay-bin.git
         echo " "
-        echo -e "\e[1;36mInstalling waydroid\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sleep 0.5
         
         #check which image to install
@@ -234,7 +247,7 @@ menu(){
         systemctl start waydroid-container 
 
     elif [[ $os == 3 || $os == 03 ]];then 
-        echo -e "\e[1;36mAdding copr repository\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mAdding copr repository\e[0m"
         sudo yum update -y
         sudo dnf copr enable aleasto/waydroid -y
 
@@ -246,11 +259,11 @@ menu(){
             sudo dnf update -y
         fi
 
-        echo -e "\e[1;36mInstalling waydroid\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sudo dnf install waydroid -y
 
         
-        echo -e "\e[1;36mSetting up waydroid\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSetting up waydroid\e[0m"
         sleep 0.5
         
         #choose which image to install
@@ -262,10 +275,12 @@ menu(){
         #check and start weston
         weston 
         echo ""
-        echo -e "\e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
         waydroid show-full-ui
         
     else
+        echo -e "\e[1;36m[!] invalid option !!!, restarting in 5 seconds....."
+        sleep 5
         menu
     fi
 }
