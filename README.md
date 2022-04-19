@@ -96,7 +96,7 @@ Installer support for:
 
 ### support
 - For Queries: 
-       - [Telegram group](https://t.me/waydroid)
-       - [Reddit community](https://www.reddit.com/r/waydroid/)
+  - [Telegram group](https://t.me/waydroid)
+  - [Reddit community](https://www.reddit.com/r/waydroid/)
 - Contributions, issues, and feature requests are welcome!
 - Give a ★ if you like this project!
