@@ -17,8 +17,9 @@ weston(){
         sudo cp 'waydroid launcher.desktop' /usr/share/applications
 
         echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
-        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning\e[0m: always launch waydroid with '\e[1;41mwaydroid launcher desktop icon\e[0m' or using '\e[1;41msystemctl --user start wd-launcher.service\e[0m' from terminal"
+        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning\e[0m: always launch waydroid with \e[1;41mwaydroid launcher desktop icon\e[0m or using \e[1;41msystemctl --user start wd-launcher.service\e[0m from terminal"
         systemctl --user start wd-launcher.service
+        sleep 10
         exit
     else
         continue &> /dev/null
