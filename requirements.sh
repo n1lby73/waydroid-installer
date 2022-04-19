@@ -9,7 +9,7 @@ de(){
         sudo sed -i 's/WaylandEnable=false/#WaylandEnable=fale/g' /etc/gdm3/custom.conf 
 
         if [[ $? -eq 0 ]]; then
-            continue &> /dev/null
+            return
         else
             sudo sed -i 's/WaylandEnable=false/#WaylandEnable=fale/g' /etc/gdm/custom.conf
         fi
@@ -92,7 +92,7 @@ kernel_downgrade(){
         echo " "
         echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;36mExpect bugs !!!\e[0m"
         sleep 5
-        continue &> /dev/null
+        return
 
     elif [[ $downgrade == "y" || $downgrade == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mChecking for dependencies\e[0m"
@@ -174,7 +174,7 @@ kernel_downgrade(){
 fedora=$(source /etc/os-release && echo $ID)
 version=$(source /etc/os-release && echo $VERSION_ID)
 if [[ "$fedora" != "fedora" ]]; then
-    continue &> /dev/null
+    return
 else
     #check fedora version
     if [[ "$version" -lt 35 ]]; then
@@ -186,7 +186,7 @@ else
         sudo dnf system-upgrade clean
         sudo dnf clean packages
         sudo yum install figlet -y
-        continue &> /dev/null
+        return
     fi
 fi
 
@@ -194,7 +194,7 @@ fi
 arch=$(source /etc/os-release && echo $ID)
 kernel=$(uname -r | cut -c -6)
 if [[ "$arch" != "arch" ]]; then
-    continue &> /dev/null
+    return
 else
     #check arch kernel installed
     if [[ "$kernel" > 5.16.3 ]]; then
@@ -203,7 +203,7 @@ else
         echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning:-\e[0m your kernel is not yet supported: "$kernel
         kernel_downgrade
     else
-        continue &> /dev/null
+        return
     fi
 fi
 

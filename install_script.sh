@@ -22,7 +22,7 @@ weston(){
         sleep 10
         exit
     else
-        continue &> /dev/null
+        return
     fi
 }
 
@@ -35,7 +35,7 @@ banner(){
     if [[ "$banner" == "Arch Linux \r (\l)" ]]; then
         pacman -Qi figlet > /dev/null
         if [[ $? -eq 0 ]]; then
-            continue &> /dev/null
+            return
         else
             pacman -S figlet > /dev/null
 
@@ -297,7 +297,7 @@ menu(){
         #check fedora version
         version=$(source /etc/os-release && echo $VERSION_ID)
         if [[ "$version" -ne 35 ]]; then
-            continue &> /dev/null
+            return
         else
             sudo dnf update -y
         fi
