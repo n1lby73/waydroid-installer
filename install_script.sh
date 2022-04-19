@@ -22,7 +22,7 @@ weston(){
         sleep 10
         exit
     else
-        return
+        continue &> /dev/null
     fi
 }
 
@@ -35,7 +35,7 @@ banner(){
     if [[ "$banner" == "Arch Linux \r (\l)" ]]; then
         pacman -Qi figlet > /dev/null
         if [[ $? -eq 0 ]]; then
-            return
+            continue &> /dev/null
         else
             pacman -S figlet > /dev/null
 
@@ -276,7 +276,7 @@ menu(){
         #going to make use of yay
         #pacman -Syy wget && wget https://aur.archlinux.org/cgit/aur.git/snapshot/waydroid.tar.gz && tar -xf waydroid.tar.gz -C 
         sudo pacman -Syu --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-        rm -rf yay-bin
+        cd ~ && rm -rf yay-bin
         echo " "
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sleep 0.5
@@ -297,7 +297,7 @@ menu(){
         #check fedora version
         version=$(source /etc/os-release && echo $VERSION_ID)
         if [[ "$version" -ne 35 ]]; then
-            return
+            continue &> /dev/null
         else
             sudo dnf update -y
         fi

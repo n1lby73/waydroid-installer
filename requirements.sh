@@ -2,7 +2,7 @@
 
 #function for desktop environment
 de(){
-    echo " "
+    echo""
     DE=$(echo $XDG_CURRENT_DESKTOP)
     if [[ "$DE" == *"GNOME" || "$DE" == "ubuntu:GNOME" ]]; then
 
