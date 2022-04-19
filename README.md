@@ -24,7 +24,7 @@ It automates the process of installing waydroid - A container base approach to b
 - Makes waydroid launch easier on weston enabled pc with the help of a desktop icon
 - Downgrade and upgrade kernels and distro version where neccessary
 
-### Compatibility
+<!-- ### Compatibility
 To check if waydroid is compatible with your device, kindly run:
 ```
 
@@ -33,7 +33,7 @@ If the above command outputs
 ```
 
 ```
-Then neither waydroid nor this installer is compatible with your device
+Then neither waydroid nor this installer is compatible with your device -->
 
 ## Desktop environment:
  During development wd-installer was tested on the following desktop enviroment:
