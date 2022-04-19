@@ -276,7 +276,7 @@ menu(){
         #going to make use of yay
         #pacman -Syy wget && wget https://aur.archlinux.org/cgit/aur.git/snapshot/waydroid.tar.gz && tar -xf waydroid.tar.gz -C 
         sudo pacman -Syu --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-        cd ~ && rm -rf yay-bin.git
+        rm -rf yay-bin
         echo " "
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sleep 0.5

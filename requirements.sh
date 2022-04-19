@@ -185,6 +185,7 @@ else
         sleep 5
         sudo dnf system-upgrade clean
         sudo dnf clean packages
+        sudo yum install figlet -y
         continue &> /dev/null
     fi
 fi
@@ -197,6 +198,7 @@ if [[ "$arch" != "arch" ]]; then
 else
     #check arch kernel installed
     if [[ "$kernel" > 5.16.3 ]]; then
+        sudo pacman -Syyu figlet
         echo " "
         echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning:-\e[0m your kernel is not yet supported: "$kernel
         kernel_downgrade
