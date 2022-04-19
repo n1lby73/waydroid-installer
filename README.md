@@ -22,6 +22,7 @@ It automates the process of installing waydroid - A container base approach to b
 - Ability to install waydroid on any linux pc
 - Choose if you need GAPPS or not
 - Makes waydroid launch easier on weston enabled pc with the help of a desktop icon
+- Downgrade and upgrade kernels and distro version where neccessary
 
 ### Compatibility
 To check if waydroid is compatible with your device, kindly run:
@@ -74,12 +75,12 @@ sudo systemctl restart waydroid-container
 ## To do:
 Installer support for:
 - [x] Debian distros
-- [ ] Arch distros
+- [x] Arch distros
 - [x] Fedora
-- [ ] Desktop launcher for weston session
+- [x] Desktop launcher for weston session
 - [ ] Solus
 - [ ] Android 11
-- [ ] Offline support for installing waydroid if you have the images
+- [x] Offline support for installing waydroid if you have the images
 
 
 ### support
