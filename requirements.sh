@@ -169,6 +169,7 @@ kernel_downgrade(){
         kernel_downgrade
     fi
 }
+
 #check if distro is fedora
 fedora=$(source /etc/os-release && echo $ID)
 version=$(source /etc/os-release && echo $VERSION_ID)
