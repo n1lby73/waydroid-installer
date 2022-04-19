@@ -76,6 +76,43 @@ check_vm(){
     fi
 }
 
+#function for offline installer
+    #function to check for directory and files
+offline(){
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;36mEnter path to build directory: \e[0m' dir
+    if [[ -d $dir ]]; then
+        #check if system.img and vendor.img files are in directory
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;32mchecking for the following files:\e[0m\n1. system.img\n2. vendor.img"
+        if [[ -f $dir/system.img && -f $dir/vendor.img ]]; then
+            echo " "
+            echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
+            #create a tempoary directory
+            count to know how many files are there 
+            count=$(ls -A $dir | wc -l)
+            if [[ $count -eq 2 ]]; then 
+                sudo waydroid init -i $dir
+            else
+                sudo mkdir temp 
+                cp $dir/system.img temp
+                cp $dir/vendor.img temp
+                sudo waydroid init -i temp
+                sudo rm -rf temp
+                sudo systemctl start waydroid-container
+            fi
+        else
+            echo " "
+            echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mError:- \e[1;32mOne or both files not found, input correct path to directory\e[0m"
+            sleep 2
+            offline
+        fi
+    else
+        echo " "
+        echo -e "\e[32m[\e[35m-\e[32m] \e[1;32mDirectory not found, input correct path to directory\e[0m"
+        sleep 2
+        offline
+    fi
+}
+
 #Function for fedora gapps prompt
 gapps_fedora(){
      read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
@@ -87,7 +124,7 @@ gapps_fedora(){
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://waydroid.bardia.tech/OTA/system -v https://waydroid.bardia.tech/OTA/vendor && sudo systemctl enable --now waydroid-container
-    
+   
     elif [[ $gapps == "" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
         sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
@@ -103,7 +140,7 @@ gapps_fedora(){
 
 #Function for debian gapps prompt
 gapps_debian(){
-    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n/o[yes/no/offline] - default:- n):\e[0m' gapps
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
             echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
@@ -117,11 +154,15 @@ gapps_debian(){
             sudo waydroid init -s GAPPS
             sudo systemctl start waydroid-container
 
+        elif [[ $gapps == "o" || $gapps == "O" ]]; then
+            offline
+        
         elif [[ $gapps == "" ]]; then 
             echo -e "\e[1;32mUsing default value\e[0m"
             sudo apt-get install waydroid -y
             sudo waydroid init
             sudo systemctl start waydroid-container
+        
         
         else
             echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
@@ -133,7 +174,7 @@ gapps_debian(){
 
 #Function for arch gapps prompt
 gapps_arch(){
-    read -p $"\e[32m[\e[35m+\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m" gapps
+    read -p $'\e[32m[\e[35m+\e[32m] \e[1;32mDo you want gapps installed (y/n/o[yes/no/offline] - default:- n):\e[0m' gapps
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
             echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
@@ -146,6 +187,9 @@ gapps_arch(){
         elif [[ $gapps == "" ]]; then
             echo -e"\e[1;32mInstalling default\e[0m"
             sudo yay -S waydroid && waydroid init
+
+        elif [[ $gapps == "o" || $gapps == "O" ]]; then
+            offline    
         
         else
             echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
@@ -169,7 +213,7 @@ menu(){
     echo "[03] Fedora"
     echo " "
 
-    read -p $"\e[32m[\e[35m+\e[32m] which distro are you running: " os
+    read -p $'\e[32m[\e[35m+\e[32m] which distro are you running: ' os
     printf "${STOP}"
 
     if [[ $os == 1 || $os == 1 ]];then
