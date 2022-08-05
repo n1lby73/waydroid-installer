@@ -102,4 +102,4 @@ Installer support for:
 - Give a ★ if you like this project!
 
 ### LICENSE
-[GNU V3](LIENSE)
+[GNU V3](LICENSE)
