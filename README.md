@@ -100,3 +100,6 @@ Installer support for:
   - [Reddit community](https://www.reddit.com/r/waydroid/)
 - Contributions, issues, and feature requests are welcome!
 - Give a ★ if you like this project!
+
+### LICENSE
+[GNU V3](LIENSE)
