@@ -1,5 +1,18 @@
 #!/usr/bin/bash
 
+#check for error function
+check(){
+    if [[ $? -eq 0 ]]; then
+
+        continue &> /dev/null
+
+    else
+
+        echo "Script has failed due to some unknown error"
+        exit
+    fi
+}
+
 #weston function
 weston(){
     wayland=$(echo $XDG_SESSION_TYPE)
@@ -114,7 +127,7 @@ offline(){
 
 #Function for fedora gapps prompt
 gapps_fedora(){
-     read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n):\e[0m' gapps
+     read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n): \e[0m' gapps
     
     if [[ $gapps == "n" || $gapps == "N" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
@@ -122,7 +135,7 @@ gapps_fedora(){
     
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
-        sudo waydroid init -c https://waydroid.bardia.tech/OTA/system -v https://waydroid.bardia.tech/OTA/vendor && sudo systemctl enable --now waydroid-container
+        sudo waydroid init -c https://ota.waydro.id/system -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
    
     elif [[ $gapps == "" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
@@ -294,6 +307,9 @@ menu(){
         sudo yum update -y
         sudo dnf copr enable aleasto/waydroid -y
 
+        #check for error
+        check
+
         #check fedora version
         version=$(source /etc/os-release && echo $VERSION_ID)
         if [[ "$version" -ne 35 ]]; then
@@ -302,15 +318,23 @@ menu(){
             sudo dnf update -y
         fi
 
+        #check for error
+        check 
+
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sudo dnf install waydroid -y
 
-        
+        #check for error
+        check 
+
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSetting up waydroid\e[0m"
         sleep 0.5
         
         #choose which image to install
         gapps_fedora
+
+        #check for error
+        check
 
         #check vm
         check_vm
@@ -319,6 +343,7 @@ menu(){
         weston 
         echo ""
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
+        sudo waydroid init
         waydroid show-full-ui
         
     else
