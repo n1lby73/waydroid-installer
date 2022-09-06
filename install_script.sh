@@ -131,15 +131,15 @@ gapps_fedora(){
     
     if [[ $gapps == "n" || $gapps == "N" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
-        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
+        sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
     
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
-        sudo waydroid init -c https://ota.waydro.id/system -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
+        sudo waydroid init -c https://sourceforge.net/projects/waydroid/files/images/system/lineage/waydroid_x86_64/lineage-17.1-20220723-GAPPS-waydroid_x86_64-system.zip/download -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
    
     elif [[ $gapps == "" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
-        sudo waydroid init -c https://raw.githubusercontent.com/aleasto/waydroid-ota/main/system -v https://raw.githubusercontent.com/aleasto/waydroid-ota/main/vendor && sudo systemctl enable --now waydroid-container
+        sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
     
     else
         echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
