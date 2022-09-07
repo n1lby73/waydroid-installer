@@ -228,7 +228,7 @@ menu(){
     read -p $'\e[32m[\e[35m+\e[32m] which distro are you running: ' os
     printf "${STOP}"
 
-    if [[ $os == 1 || $os == 1 ]];then
+    if [[ $os == 1 || $os == 01 ]];then
 
         # check distro
         echo " "
