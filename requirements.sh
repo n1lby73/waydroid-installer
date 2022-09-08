@@ -38,6 +38,19 @@ displayserver(){
 fi
 }
 
+#check for error function
+check(){
+    if [[ $? -eq 0 ]]; then
+
+        continue &> /dev/null
+
+    else
+
+        echo "Script has failed due to some unknown error"
+        exit
+    fi
+}
+
 #update fedora function
 fedora_update(){
     read -p $'\e[1;32mDo you want to update to fedora 35 (y/n - default:- y):\e[0m' update
@@ -185,7 +198,7 @@ else
         sleep 5
         sudo dnf system-upgrade clean
         sudo dnf clean packages
-        sudo yum install figlet -y
+        sudo yum install figlet wget -y
         return
     fi
 fi
@@ -209,5 +222,6 @@ fi
 
 
 displayserver
+check
 #starting installation script
 bash install_script.sh

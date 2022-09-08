@@ -13,6 +13,32 @@ check(){
     fi
 }
 
+# aurora function
+aurora(){
+
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want aurora store installed (y/n[yes/no] - default:- y):\e[0m' aurora
+
+    if [[ $aurora == "y" || $aurora == "Y" ]]; then
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up aurora store\e[0m"
+        wget https://tinyurl.com/aurora-store
+        wadroid app install aurora-*
+
+        check
+    
+    elif [[ $aurora == "n" || $aurora == "N" ]]; then
+        continue &> /dev/null
+    
+    elif [[ $aurora == "" ]]; then 
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up aurora store\e[0m"
+        wget https://tinyurl.com/aurora-store
+        waydroid app install aurora-*
+
+    fi
+
+    check
+
+}
+
 #weston function
 weston(){
     wayland=$(echo $XDG_SESSION_TYPE)
@@ -130,17 +156,27 @@ gapps_fedora(){
      read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n): \e[0m' gapps
     
     if [[ $gapps == "n" || $gapps == "N" ]]; then
+
+        #install aurora store
+        aurora
+
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
-    
+        
+
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://sourceforge.net/projects/waydroid/files/images/system/lineage/waydroid_x86_64/lineage-17.1-20220723-GAPPS-waydroid_x86_64-system.zip/download -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
    
     elif [[ $gapps == "" ]]; then
+
+        #install aurora  store
+        aurora
+
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
         sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
-    
+        
+
     else
         echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
         sleep 1
@@ -259,8 +295,16 @@ menu(){
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling repo.....\e[0m"
 
         sudo wget https://repo.waydro.id/waydroid.gpg -O /usr/share/keyrings/waydroid.gpg
+
+        check 
+        
         sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/waydroid.gpg] https://repo.waydro.id/ $distro main' > /etc/apt/sources.list.d/waydroid.list"
+        
+        check 
+        
         sudo apt-get -q update
+
+        check
 
         #install waydroid
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid....\e[0m"
@@ -269,14 +313,21 @@ menu(){
         #check which image to install
         gapps_debian
         
+        check
+        
         #check vm
         check_vm
+        
+        check 
 
         #check and start weston
         weston 
+
+        check 
+
         echo ""
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
-        
+                
         wayland_warning=$(echo $XDG_SESSION_TYPE)
         if [[ "$wayland_warning" != "wayland" ]]; then
             echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0mSwitch to wayland display server before launching waydroid"
@@ -289,7 +340,13 @@ menu(){
         #going to make use of yay
         #pacman -Syy wget && wget https://aur.archlinux.org/cgit/aur.git/snapshot/waydroid.tar.gz && tar -xf waydroid.tar.gz -C 
         sudo pacman -Syu --needed base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+        
+        check 
+
         rm -rf yay-bin
+
+        check 
+
         echo " "
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling waydroid\e[0m"
         sleep 0.5
@@ -297,14 +354,21 @@ menu(){
         #check which image to install
         gapps_arch
 
+        check
+
         #check vm
         check_vm
+        
+        check
 
         systemctl start waydroid-container 
 
     elif [[ $os == 3 || $os == 03 ]];then 
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mAdding copr repository\e[0m"
         sudo yum update -y
+
+        check
+
         sudo dnf copr enable aleasto/waydroid -y
 
         #check for error
@@ -327,7 +391,7 @@ menu(){
         #check for error
         check 
 
-        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSetting up waydroid\e[0m"
+        # echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSetting up waydroid\e[0m"
         sleep 0.5
         
         #choose which image to install

@@ -92,6 +92,7 @@ Installer support for:
 - [ ] Solus
 - [ ] Android 11
 - [x] Offline support for installing waydroid if you have the images
+- [x] Added aurora store support for vanilla install
 
 
 ### support
