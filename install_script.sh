@@ -159,7 +159,8 @@ gapps_fedora(){
 
         #install aurora store
         aurora
-
+        sleep 1
+        
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
         
