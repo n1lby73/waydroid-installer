@@ -14,18 +14,18 @@ check(){
 
     else
 
-        echo "Script has failed due to some unknown error"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSCript has failed due to some unknwn error\e[0m"
         exit
     fi
 }
 
-echo " stopping waydroid session"
+echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mStopping waydroid session\e[0m"
 waydroid session stop
 check
 sudo waydroid container stop
 check
 
-echo "Detecting your distro"
+echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mDetecting your distro\e[0m"
 
 #check if distro is fedora
 fedora=$(source /etc/os-release && echo $ID)
@@ -38,9 +38,9 @@ kernel=$(uname -r | cut -c -6)
 if [[ "$fedora" == "fedora" ]]; then
 
     #remove waydroid if distro is fedora based
-    echo "Your distro is fedora"
+    echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mYour distro is fedora\e[0m"
     sleep 0.5
-    echo "Uninstalling waydroid"
+    echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mUninstalling waydroid\e[0m"
 
     sudo dnf uninstall waydroid
     check
@@ -48,9 +48,9 @@ if [[ "$fedora" == "fedora" ]]; then
 elif [[ "$arch" == "arch" ]]; then
 
     #remove waydroid if it pacman
-    echo "Your distro is arch"
+    echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mYour distro is arch\e[0m"
     sleep 0.5
-    echo "Uninstalling Waydroid"
+    echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mUninstalling waydroid\e[0m"
 
     pacman -R waydroid
     check
@@ -59,7 +59,7 @@ elif [[ "$arch" == "arch" ]]; then
 
 else
 
-    echo "Your running a debian dstro"
+    echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mYou're running a debian distro\e[0m"
 
     apt remove waydroid
     check
@@ -68,11 +68,11 @@ fi
 
 #remove additional files
 
-echo "removing additional waydroid files"
+echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mRemoving additional waydroid files\e[0m"
 
 rm -rf /var/lib/waydroid /home/.waydroid ~/waydroid ~/.share/waydroid ~/.local/share/applications/*aydroid* ~/.local/share/waydroid
 check
 
 sleep 1
 
-echo "uninstall successfully"
+echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mUninstall successfully\e[0m"
