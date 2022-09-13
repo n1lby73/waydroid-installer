@@ -189,7 +189,7 @@ gapps_fedora(){
 
 #Function for debian gapps prompt
 gapps_debian(){
-    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n/o[yes/no/offline] - default:- n):\e[0m' gapps
+    read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n/o[yes/no/offline] - default:- n): \e[0m' gapps
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
             echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
