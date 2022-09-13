@@ -59,11 +59,13 @@ weston(){
     DE=$(echo $XDG_CURRENT_DESKTOP)
     if [[ "$wayland" != "wayland" && "$DE" != *"GNOME" ]]; then
         sudo cp weston.service ~/.config/systemd/user &> /dev/null
-    if [[ $? -ne 0 ]];then
-        sudo mkdir ~/.config/systemd &> /dev/null
-        sudo mkdir ~/.config/systemd/user &> /dev/null
-        sudo cp weston.service ~/.config/systemd/user
-    fi
+
+        if [[ $? -ne 0 ]];then
+            sudo mkdir ~/.config/systemd &> /dev/null
+            sudo mkdir ~/.config/systemd/user &> /dev/null
+            sudo cp weston.service ~/.config/systemd/user
+        fi
+
         sudo mkdir /usr/share/wd-launcher
         sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png
         sudo cp wd-launcher.service ~/.config/systemd/user
@@ -74,6 +76,11 @@ weston(){
         systemctl --user start wd-launcher.service
         sleep 10
         exit
+
+    elif [[ "$wayland" != "wayland" && "$DE" == *"GNOME" ]]; then
+        echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mYour current DE is gnome\e[0m"
+        echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mYou can switch to  wayland from the login screen after reboot\e[0m"
+        echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mDo you wish to continue installing weston service\e[0m"
     else
         continue &> /dev/null
     fi
