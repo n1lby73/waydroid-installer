@@ -99,7 +99,7 @@ Installer support for:
 Sometimes things don't go as planned and you need to remove it all and start over. To do that, follow the steps below:
 
 ```
-sudo uninstall.sh 
+sudo bash uninstall.sh 
 ```
 ### support
 - For Queries: 
