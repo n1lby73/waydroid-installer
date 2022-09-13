@@ -14,7 +14,7 @@ check(){
 
     else
 
-        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSCript has failed due to some unknwn error\e[0m"
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mSCript has failed due to some unknown error\e[0m"
         exit
     fi
 }
