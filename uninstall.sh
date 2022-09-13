@@ -3,7 +3,7 @@
 if [[ $EUID -ne 0 ]]; then
 
     echo "run script with superuser priveledge"
-
+    exit
 fi 
 
 #check for error function
