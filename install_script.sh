@@ -80,9 +80,46 @@ weston(){
     elif [[ "$wayland" != "wayland" && "$DE" == *"GNOME" ]]; then
         echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mYour current DE is gnome\e[0m"
         echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mYou can switch to  wayland from the login screen after reboot\e[0m"
-        echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mDo you wish to continue installing weston service\e[0m"
+        read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you wish to continue installing weston service(y/n[yes/no] - default:- n): \e[0m' weston
+
+        if [[ $weston == "y" || $weston == "Y" ]]; then
+            sudo cp weston.service ~/.config/systemd/user &> /dev/null
+
+            if [[ $? -ne 0 ]];then
+                sudo mkdir ~/.config/systemd &> /dev/null
+                sudo mkdir ~/.config/systemd/user &> /dev/null
+                sudo cp weston.service ~/.config/systemd/user
+            fi
+
+            sudo mkdir /usr/share/wd-launcher
+            sudo cp waydroid.png /usr/share/wd-launcher/waydroid.png
+            sudo cp wd-launcher.service ~/.config/systemd/user
+            sudo cp 'waydroid launcher.desktop' /usr/share/applications
+
+            echo  -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid...\e[0m"
+            echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning\e[0m: always launch waydroid with \e[1;41mwaydroid launcher desktop icon\e[0m or using \e[1;41msystemctl --user start wd-launcher.service\e[0m from terminal"
+            systemctl --user start wd-launcher.service
+            sleep 10
+            exit
+        
+        elif [[ $weston == "n" || $weston == "N" ]]; then
+
+            continue &. /dev/null
+        
+        elif [[ $weston == "" ]]; then
+
+            continue &. /dev/null
+        
+        else 
+
+            echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!....."
+            sleep 1
+            weston
+        fi
+
     else
         continue &> /dev/null
+        
     fi
 }
 
