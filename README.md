@@ -75,7 +75,7 @@ sudo systemctl restart waydroid-container
 Run the below command if you are either
 - Stucked at boot screen
 - waited longer than 5-10 minutes and nothing shows on weston compositor
-close weston compositor, open a terminal and pastethis there:
+close weston compositor, open a terminal and paste this there:
 ```
 sudo systemctl restart waydroid-container
 ```
