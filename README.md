@@ -105,7 +105,7 @@ sudo bash uninstall.sh
 - For Queries: 
   - [Telegram group](https://t.me/waydroid)
   - [Reddit community](https://www.reddit.com/r/waydroid/)
-- Contributions, issues, and feature requests are welcome!
+- [Contributions](https://github.com/n1lby73/waydroid-installer/pulls) , [issues](https://github.com/n1lby73/waydroid-installer/issues) , and [feature requests](https://github.com/n1lby73/waydroid-installer/discussions) are welcome!
 - Give a ★ if you like this project!
 
 ### LICENSE
