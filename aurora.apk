@@ -1,0 +1,22 @@
+--2022-09-13 20:37:42--  https://tinyurl.com/aurora-store
+Resolving tinyurl.com (tinyurl.com)... 104.20.138.65, 104.20.139.65, 172.67.1.225, ...
+Connecting to tinyurl.com (tinyurl.com)|104.20.138.65|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://dw72.uptodown.com/dwn/Befj01mVS9Q_-gf3TXtmZBbRxFI4H3srK5KBuS3brc_Uxu8N440po-k_uL46PXbCmptxhcD8YxSVAO-LBdS3xr9r1aWKkM5N-3M5o4w9oGI3_6UCoIFyvgsKxQI-OHOq/GVYw_cf2ls27k7nfVyOUXJ1Z3-QgGglm7ExX19Ed846DDfLJ6bbxKXJvCcrZHN56Wm20iXXcVVo_HcI28VuRakhH_PcXuDptBBluMe2OQZneLNGmM5RA44H754UYeUtb/5xx39hPyOjju2TqWA3K_0HxWqXpXjVH2CdNzDbtlLSysVQ8u0Gu_nsmhnvDp0XpOP0J-k5zzun3eGmon253YvA==/aurora-store-4-1-1.apk [following]
+--2022-09-13 20:37:44--  https://dw72.uptodown.com/dwn/Befj01mVS9Q_-gf3TXtmZBbRxFI4H3srK5KBuS3brc_Uxu8N440po-k_uL46PXbCmptxhcD8YxSVAO-LBdS3xr9r1aWKkM5N-3M5o4w9oGI3_6UCoIFyvgsKxQI-OHOq/GVYw_cf2ls27k7nfVyOUXJ1Z3-QgGglm7ExX19Ed846DDfLJ6bbxKXJvCcrZHN56Wm20iXXcVVo_HcI28VuRakhH_PcXuDptBBluMe2OQZneLNGmM5RA44H754UYeUtb/5xx39hPyOjju2TqWA3K_0HxWqXpXjVH2CdNzDbtlLSysVQ8u0Gu_nsmhnvDp0XpOP0J-k5zzun3eGmon253YvA==/aurora-store-4-1-1.apk
+Resolving dw72.uptodown.com (dw72.uptodown.com)... 142.4.216.58
+Connecting to dw72.uptodown.com (dw72.uptodown.com)|142.4.216.58|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://aurora-store.en.uptodown.com/android [following]
+--2022-09-13 20:37:46--  https://aurora-store.en.uptodown.com/android
+Resolving aurora-store.en.uptodown.com (aurora-store.en.uptodown.com)... 23.213.222.163
+Connecting to aurora-store.en.uptodown.com (aurora-store.en.uptodown.com)|23.213.222.163|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘aurora-store.1’
+
+     0K .......... .......... .......... .......... ..........  227K
+    50K .......... .......... .......... ......                 422K=0.3s
+
+2022-09-13 20:37:47 (282 KB/s) - ‘aurora-store.1’ saved [88213]
+

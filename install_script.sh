@@ -20,9 +20,13 @@ aurora(){
 
     if [[ $aurora == "y" || $aurora == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up aurora store\e[0m"
-        wget https://tinyurl.com/aurora-store
-        wadroid app install aurora-*
+        wget https://tinyurl.com/aurora-store -O aurora.apk
+        check
 
+        # waydroid session start
+        # check
+
+        waydroid app install aurora.apk
         check
     
     elif [[ $aurora == "n" || $aurora == "N" ]]; then
@@ -30,9 +34,19 @@ aurora(){
     
     elif [[ $aurora == "" ]]; then 
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up aurora store\e[0m"
-        wget https://tinyurl.com/aurora-store
-        waydroid app install aurora-*
+        wget https://tinyurl.com/aurora-store -O aurora.apk
+        check
 
+        # waydroid session start
+        # check
+
+        waydroid app install aurora.apk
+        check
+
+    else
+        echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!....."
+        sleep 1
+        aurora
     fi
 
     check
@@ -156,14 +170,18 @@ gapps_fedora(){
      read -p $'\e[32m[\e[35m*\e[32m] \e[1;32mDo you want gapps installed (y/n - default:- n): \e[0m' gapps
     
     if [[ $gapps == "n" || $gapps == "N" ]]; then
-
-        #install aurora store
-        aurora
-        sleep 1
         
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
         sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
         
+        check
+
+        #install aurora store
+        aurora
+        check
+        sleep 1
+
+
 
     elif [[ $gapps == "y" || $gapps == "Y" ]]; then
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
@@ -171,15 +189,17 @@ gapps_fedora(){
    
     elif [[ $gapps == "" ]]; then
 
-        #install aurora  store
-        aurora
-
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid with default value\e[0m"
         sudo waydroid init -c https://ota.waydro.id/system  -v https://ota.waydro.id/vendor && sudo systemctl enable --now waydroid-container
         
+        check
+
+        #install aurora  store
+        aurora
+        check
 
     else
-        echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!, restarting now....."
+        echo -e "\e[32m[\e[35m-\e[32m] \e[1;36minvalid option !!!....."
         sleep 1
         gapps_fedora
     
@@ -334,6 +354,7 @@ menu(){
             echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0mSwitch to wayland display server before launching waydroid"
         else
             waydroid show-full-ui
+            exit
         fi
 
     elif [[ $os == 2 || $os == 02 ]]; then
@@ -363,6 +384,8 @@ menu(){
         check
 
         systemctl start waydroid-container 
+
+        exit
 
     elif [[ $os == 3 || $os == 03 ]];then 
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mAdding copr repository\e[0m"
@@ -410,7 +433,7 @@ menu(){
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstallation finished\nLaunching waydroid....\e[0m"
         sudo waydroid init
         waydroid show-full-ui
-        
+        exit
     else
         echo -e "\e[1;36m[!] invalid option !!!, restarting in 5 seconds....."
         sleep 5
