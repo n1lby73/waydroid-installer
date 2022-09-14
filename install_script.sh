@@ -119,7 +119,7 @@ weston(){
 
     else
         continue &> /dev/null
-        
+
     fi
 }
 
@@ -426,6 +426,10 @@ menu(){
         check_vm
         
         check
+
+        #check and start weston
+        weston 
+
 
         systemctl start waydroid-container 
 
