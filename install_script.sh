@@ -334,7 +334,7 @@ menu(){
         # check distro
         echo " "
         supported_distros=" focal bullseye hirsute jammy ubuntu-devel bookworm bullseye sid "
-        fallback_distro="focal"
+        fallback_distro="bullseye"
         distro=$(lsb_release -sc)
 
         if [[ "$supported_distros" != *" $distro "* ]]; then
@@ -347,10 +347,10 @@ menu(){
         #prerequisite
         echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling dependencies....\e[0m"
 
-        sudo apt-get update && sudo apt-get upgrade && sudo apt-get install curl python3 lxc ca-certificates -y
+        sudo apt-get update && sudo apt-get upgrade && sudo apt-get install curl python3 python3-gbinder python-pip lxc ca-certificates -y
         if [[ $? -ne 0 ]]; then
         echo " "
-        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0m Dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
+        echo -e "\e[32m[\e[35m!!!\e[32m] \e[1;31mMajor warning:-\e[0m Dependencies not satisfied\nkindly run '\e[1;41msudo apt-get install curl python3 python3-gbinder python-pip lxc ca-certificates -y && sudo apt-get update && bash requirements.sh\e[0m' manually"
         exit 1
         fi
 
