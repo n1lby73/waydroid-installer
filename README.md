@@ -71,6 +71,8 @@ sudo systemctl restart waydroid-container
 ```
 
 # Troubleshooting:
+Things might not go as plan due to we forgetting to add one or two thing and thus you would be presented with an error message. Well this is a quick fix to known errors
+
 ### Stuck at boot screen on weston compositor
 Run the below command if you are either
 - Stucked at boot screen
@@ -79,6 +81,12 @@ close weston compositor, open a terminal and paste this there:
 ```
 sudo systemctl restart waydroid-container
 ```
+### Python3-gbinder error
+If you see a message saying python3-gbinder not installed or as an unmet dependency on any debian distro then do this:
+```
+curl -s https://gist.githubusercontent.com/cniw/98e204d7dbc73a3fa1bf61629b2a2fc1/raw | bash
+```
+
 After that you are good to go
 # Contributors
 @Fuseteam
