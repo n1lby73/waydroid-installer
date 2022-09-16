@@ -187,7 +187,7 @@ kernel_downgrade(){
 fedora=$(source /etc/os-release && echo $ID)
 version=$(source /etc/os-release && echo $VERSION_ID)
 if [[ "$fedora" != "fedora" ]]; then
-    return
+    return &> /dev/null
 else
     #check fedora version
     if [[ "$version" -lt 35 ]]; then
@@ -199,7 +199,7 @@ else
         sudo dnf system-upgrade clean
         sudo dnf clean packages
         sudo yum install figlet wget -y
-        return
+        return &> /dev/null
     fi
 fi
 

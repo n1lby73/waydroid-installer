@@ -108,7 +108,7 @@ weston(){
         
         elif [[ $weston == "" ]]; then
 
-            continue &. /dev/null
+            continue &> /dev/null
         
         else 
 
