@@ -207,7 +207,7 @@ fi
 arch=$(source /etc/os-release && echo $ID)
 kernel=$(uname -r | cut -c -6)
 if [[ "$arch" != "arch" ]]; then
-    return
+    return &> /dev/null
 else
     #check arch kernel installed
     if [[ "$kernel" > 5.16.3 ]]; then
@@ -216,7 +216,7 @@ else
         echo -e "\e[32m[\e[35m!\e[32m] \e[1;31mWarning:-\e[0m your kernel is not yet supported: "$kernel
         kernel_downgrade
     else
-        return
+        return &> /dev/null
     fi
 fi
 
