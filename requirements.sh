@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-#function for desktop environment
 de(){
     echo""
     DE=$(echo $XDG_CURRENT_DESKTOP)
