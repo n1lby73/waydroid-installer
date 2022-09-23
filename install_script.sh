@@ -333,7 +333,7 @@ menu(){
 
         # check distro
         echo " "
-        supported_distros=" focal bullseye hirsute jammy ubuntu-devel bookworm bullseye sid "
+        supported_distros=" focal bullseye hirsute jammy ubuntu-devel bookworm bullseye sid bionic"
         fallback_distro="focal"
         distro=$(lsb_release -sc)
 
