@@ -18,6 +18,9 @@ de(){
         sleep 5
     else
         #install weston
+
+        echo -e "\e[32m[\e[35m+\e[32m] \e[1;36mInstalling Weston\e[0m"
+        sleep 1
         sudo apt-get install weston -y > /dev/null
 	fi
 }
