@@ -89,7 +89,7 @@ curl -s https://gist.githubusercontent.com/cniw/98e204d7dbc73a3fa1bf61629b2a2fc1
 
 After that you are good to go
 # Contributors
-@Fuseteam
+[@Fuseteam](https://github.com/Fuseteam)
 
 ## To do:
 Installer support for:
