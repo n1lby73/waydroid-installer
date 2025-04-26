@@ -291,15 +291,15 @@ gapps_arch(){
 
         if [[ $gapps == "n" || $gapps == "N" ]]; then
             echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
-            sudo yay -S waydroid && waydroid init
+            sudo yay -S waydroid && sudo waydroid init
 
         elif [[ $gapps == "y" || $gapps == "Y" ]]; then
             echo -e "\e[32m[\e[35m+\e[32m] \e[1;36msetting up waydroid\e[0m"
-            sudo yay -S waydroid && waydroid init -s GAPPS
+            sudo yay -S waydroid && sudo waydroid init -s GAPPS
 
         elif [[ $gapps == "" ]]; then
             echo -e"\e[1;32mInstalling default\e[0m"
-            sudo yay -S waydroid && waydroid init
+            sudo yay -S waydroid && sudo waydroid init
 
         elif [[ $gapps == "o" || $gapps == "O" ]]; then
             offline    
